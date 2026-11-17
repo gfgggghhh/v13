@@ -6,6 +6,7 @@ import android.hardware.usb.UsbDevice
 import com.serenegiant.usb.IFrameCallback
 import com.serenegiant.usb.USBMonitor
 import com.serenegiant.usb.UVCCamera
+import com.serenegiant.usb.UVCParam
 import org.opencv.core.CvType
 import org.opencv.core.Mat
 
@@ -30,7 +31,7 @@ class UvcCameraSource(private val ctx: Context, private val device: UsbDevice) :
             override fun onCancel(d: UsbDevice?) { onError("USB permission denied") }
             override fun onDeviceOpen(d: UsbDevice?, ctrlBlock: USBMonitor.UsbControlBlock?, createNew: Boolean) {
                 try {
-                    val cam = UVCCamera()
+                    val cam = UVCCamera(UVCParam())
                     cam.open(ctrlBlock)
                     try {
                         cam.setPreviewSize(width, height, UVCCamera.FRAME_FORMAT_MJPEG)
